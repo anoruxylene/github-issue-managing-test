@@ -10,16 +10,17 @@ jobs:
     permissions:
       issues: write
     steps:
-      # Mark issues as stale if they have not been updated for a certain period.
-      - uses: actions/stale@v9
+      - name: 'Mark stale issues'
+        uses: actions/stale@v9
         with:
           days-before-issue-stale: 1
           days-before-close: -1
           stale-issue-label: 'lifecycle/stale'
+          exempt-issue-labels: 'lifecycle/rotten'
           # Add a comment with 'stale-issue-message' option if needed.
 
-      # Mark issues as rotten if they are stale for a certain period.
-      - uses: actions/stale@v9
+      - name: 'Mark rotten issues'
+        uses: actions/stale@v9
         with:
           days-before-issue-stale: 1
           days-before-close: -1
@@ -28,8 +29,8 @@ jobs:
           labels-to-remove-when-stale: 'lifecycle/stale'
           # Add a comment with 'stale-issue-message' option if needed.
 
-      # Close rotten issues after a certain period of inactivity.
-      - uses: actions/stale@v9
+      - name: 'Close rotten issues'
+        uses: actions/stale@v9
         with:
           days-before-close: 1
           stale-issue-label: 'lifecycle/rotten'
