@@ -18,6 +18,9 @@ jobs:
       (contains(github.event.issue.labels.*.name, 'lifecycle/stale') || 
        contains(github.event.issue.labels.*.name, 'lifecycle/rotten'))
     steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+
       - name: 'Remove stale labels'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
