@@ -1,0 +1,19 @@
+on:
+  issues:
+    types: [ reopened ]
+  issue_comment:
+    types: [ created, edited ]
+
+jobs:
+  remove-stale:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.issue.state == 'open' &&
+      (contains(github.event.issue.labels.*.name, 'stale') || contains(github.event.issue.labels.*.name, 'rotten'))
+    steps:
+      - name: 'Remove stale labels'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Removing 'stale' label from issue #${{ github.event.issue.number }}"
+          gh issue edit ${{ github.event.issue.number }} --remove-label lifecycle/stale lifecycle/rotten

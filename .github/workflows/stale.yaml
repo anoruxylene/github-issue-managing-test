@@ -32,6 +32,7 @@ jobs:
       - name: 'Close rotten issues'
         uses: actions/stale@v9
         with:
+          days-before-stale: -1
           days-before-close: 1
           stale-issue-label: 'lifecycle/rotten'
           # Add a comment with 'close-issue-message' option if needed.
