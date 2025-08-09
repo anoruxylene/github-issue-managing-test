@@ -1,15 +1,22 @@
+name: 'Unstale Issue'
+
 on:
   issues:
     types: [ reopened ]
   issue_comment:
     types: [ created, edited ]
 
+
 jobs:
   remove-stale:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     if: >-
       github.event.issue.state == 'open' &&
-      (contains(github.event.issue.labels.*.name, 'stale') || contains(github.event.issue.labels.*.name, 'rotten'))
+      (contains(github.event.issue.labels.*.name, 'lifecycle/stale') || 
+       contains(github.event.issue.labels.*.name, 'lifecycle/rotten'))
     steps:
       - name: 'Remove stale labels'
         env:
