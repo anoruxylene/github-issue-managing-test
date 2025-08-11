@@ -1,8 +1,9 @@
 name: 'Mark stale issues'
 
-on: workflow_dispatch
-#  schedule:
-#    - cron: '0 1 * * *'  # Runs daily at 01:00 UTC
+#on: workflow_dispatch
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Runs daily at 01:00 UTC
 
 jobs:
   stale-issues:
