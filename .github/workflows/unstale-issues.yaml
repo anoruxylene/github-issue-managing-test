@@ -4,14 +4,12 @@ on:
   issues:
     types: [ reopened ]
   issue_comment:
-    types: [ created, edited ]
-
+    types: [ created ]
 
 jobs:
   remove-stale:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       issues: write
     if: >-
       github.event.issue.state == 'open' &&
