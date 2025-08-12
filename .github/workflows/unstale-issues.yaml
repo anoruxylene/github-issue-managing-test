@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 'Remove stale labels'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Removing 'stale' label from issue #${{ github.event.issue.number }}"
           gh issue edit ${{ github.event.issue.number }} --remove-label "lifecycle/stale,lifecycle/rotten"
